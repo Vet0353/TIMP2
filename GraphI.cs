@@ -9,18 +9,14 @@ namespace TIMP2
 {
     class GraphI : IteratorAggregate
     {
-        List<GraphI> elements;
-        bool visited;
+        GraphElement head;
         public GraphI(IStrategy method)
         {
-            elements = new List<GraphI>();
             Method = method;
-            visited = false;
         }
 
-        public List<GraphI> Elements { get => elements; }
-        public bool Visited { get => visited; set => visited = value; }
-        IStrategy Method { get; set; }
+        internal GraphElement Head { get { return head; } }
+        public IStrategy Method { get; set; }
         //ssss
         public override IEnumerator GetEnumerator()
         {
@@ -38,31 +34,28 @@ namespace TIMP2
 
     class GraphIterator : Iterator
     {
-        private GraphI head;
-        private GraphI curr;
-
-        public GraphIterator(GraphI element)
+        GraphI graph;
+        GraphElement current;
+        public GraphIterator(GraphI graph)
         {
-            head = element;
-            curr = element;
+            this.graph = graph;
+            current = this.graph.Head;
         }
 
         public override object Current()
         {
-            return head;
+            return current;
         }
 
         public override bool MoveNext()
         {
-            throw new NotImplementedException();
+            
         }
 
         public override void Reset()
         {
-            curr = head;
+            
         }
-
-        public IStrategy Method { private get; set; }
     }
     abstract class IteratorAggregate : IEnumerable
     {

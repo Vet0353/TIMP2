@@ -10,23 +10,32 @@ namespace TIMP2
     {
         static void Main(string[] args)
         {
-
+            GraphI graph = new GraphI(new dfs());
         }
         
     }
     interface IStrategy
     {
-        GraphI Move(GraphI head);
+        GraphElement GetNext(GraphElement element);
     }
     class dfs : IStrategy
     {
-        public GraphI Move(GraphI head)
+        public Stack<GraphElement> stack = new Stack<GraphElement>();
+        public GraphElement GetNext(GraphElement element)
         {
-            head.Visited = true;
-            foreach (GraphI element in head)
+            GraphElement next;
+            stack.Push(element);
+            foreach (GraphElement child in element.ListElements)
             {
-
+                if (!stack.Contains(child))
+                {
+                    next = child;
+                    break;
+                }
             }
+        }
+        GraphElement Faind(GraphElement element)
+        {
 
         }
     }
